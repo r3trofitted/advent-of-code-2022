@@ -3,7 +3,7 @@ require_relative "lib"
 
 class InventoryTest < Minitest::Test
   def setup
-    @inventory = Inventory.new <<~TXT
+    @inventory = Inventory.from_data <<~TXT
       1000
       2000
       3000
