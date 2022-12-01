@@ -42,6 +42,17 @@ class InventoryTest < Minitest::Test
     assert_includes elf.calories_carried, 8000
     assert_includes elf.calories_carried, 9000
   end
+  
+  def test_fetching_any_number_of_elves_with_the_most_calories
+    inventory = Inventory.from_data @data
+    
+    elves = inventory.elves_with_the_most_calories(3)
+    
+    first, second, third = elves
+    assert_equal 24000, first.total_calories_carried
+    assert_equal 11000, second.total_calories_carried
+    assert_equal 10000, third.total_calories_carried
+  end
 end
 
 class ElfTest < Minitest::Test

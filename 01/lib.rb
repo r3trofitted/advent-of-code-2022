@@ -16,7 +16,11 @@ class Inventory
   end
   
   def elf_with_the_most_calories
-    @elves.max_by(&:total_calories_carried)
+    elves_with_the_most_calories(1).first
+  end
+  
+  def elves_with_the_most_calories(n)
+    @elves.sort_by(&:total_calories_carried).reverse.first(n)
   end
 end
 
@@ -30,4 +34,5 @@ class Elf
   def total_calories_carried
     @calories_carried.inject(:+) || 0
   end
+  alias_method :calories, :total_calories_carried
 end
