@@ -34,4 +34,5 @@ class Elf
   def total_calories_carried
     @calories_carried.inject(:+) || 0
   end
+  alias_method :calories, :total_calories_carried
 end

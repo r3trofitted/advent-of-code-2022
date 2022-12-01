@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require_relative "lib"
 
-elf = Inventory.from_data(DATA.read).elf_with_the_most_calories
-puts "The elf with the most calories carries #{elf.total_calories_carried} calories"
+elves = Inventory.from_data(DATA.read).elves_with_the_most_calories(3)
+puts "The 3 elves with the most calories carry #{elves.sum(&:calories)} calories"
 
 __END__
 9057
