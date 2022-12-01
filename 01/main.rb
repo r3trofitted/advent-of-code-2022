@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
+require_relative "lib"
 
-# Program goes here…
+elf = Inventory.from_data(DATA.read).elf_with_the_most_calories
+puts "The elf with the most calories carries #{elf.total_calories_carried} calories"
 
 __END__
 9057
