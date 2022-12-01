@@ -16,7 +16,7 @@ class Inventory
   end
   
   def elf_with_the_most_calories
-    @elves.max_by(&:total_calories_carried)
+    elves_with_the_most_calories(1).first
   end
   
   def elves_with_the_most_calories(n)
