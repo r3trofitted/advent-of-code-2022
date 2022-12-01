@@ -28,9 +28,9 @@ class InventoryTest < Minitest::Test
     
     elf = inventory.elves.first
     
-    assert_includes elf.calories_carried, "1000"
-    assert_includes elf.calories_carried, "2000"
-    assert_includes elf.calories_carried, "3000"
+    assert_includes elf.calories_carried, 1000
+    assert_includes elf.calories_carried, 2000
+    assert_includes elf.calories_carried, 3000
   end
   
   def test_fetching_the_elf_with_the_most_calories
@@ -38,8 +38,19 @@ class InventoryTest < Minitest::Test
     
     elf = inventory.elf_with_the_most_calories
     
-    assert_includes elf.calories_carried, "7000"
-    assert_includes elf.calories_carried, "8000"
-    assert_includes elf.calories_carried, "9000"
+    assert_includes elf.calories_carried, 7000
+    assert_includes elf.calories_carried, 8000
+    assert_includes elf.calories_carried, 9000
+  end
+end
+
+class ElfTest < Minitest::Test
+  def test_total_calories_carried
+    elf = Elf.new calories_carried: %w(1000 2000 3000)
+    assert_equal 6000, elf.total_calories_carried
+  end
+  
+  def test_total_calories_carried_when_nothing_carried
+    assert_equal 0, Elf.new.total_calories_carried
   end
 end

@@ -16,7 +16,7 @@ class Inventory
   end
   
   def elf_with_the_most_calories
-    @elves.max_by(&:calories_carried)
+    @elves.max_by(&:total_calories_carried)
   end
 end
 
@@ -24,6 +24,10 @@ class Elf
   attr_reader :calories_carried
   
   def initialize(calories_carried: [])
-    @calories_carried = calories_carried
+    @calories_carried = calories_carried.map(&:to_i)
+  end
+  
+  def total_calories_carried
+    @calories_carried.inject(:+) || 0
   end
 end
