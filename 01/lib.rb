@@ -18,6 +18,10 @@ class Inventory
   def elf_with_the_most_calories
     @elves.max_by(&:total_calories_carried)
   end
+  
+  def elves_with_the_most_calories(n)
+    @elves.sort_by(&:total_calories_carried).reverse.first(n)
+  end
 end
 
 class Elf
