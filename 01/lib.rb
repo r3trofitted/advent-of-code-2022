@@ -14,6 +14,10 @@ class Inventory
   def initialize(elves = [])
     @elves = elves
   end
+  
+  def elf_with_the_most_calories
+    @elves.max_by(&:calories_carried)
+  end
 end
 
 class Elf
