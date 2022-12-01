@@ -17,6 +17,8 @@ class Inventory
 end
 
 class Elf
+  attr_reader :calories_carried
+  
   def initialize(calories_carried: [])
     @calories_carried = calories_carried
   end

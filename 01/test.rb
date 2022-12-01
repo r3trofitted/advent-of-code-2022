@@ -2,8 +2,8 @@ require "minitest/autorun"
 require_relative "lib"
 
 class InventoryTest < Minitest::Test
-  def setup
-    @inventory = Inventory.from_data <<~TXT
+  def test_creating_an_inventory_with_initial_data
+    inventory = Inventory.from_data <<~TXT
       1000
       2000
       3000
@@ -19,9 +19,13 @@ class InventoryTest < Minitest::Test
 
       10000
     TXT
-  end
-  
-  def test_elves_separate_their_own_inventories
-    assert_equal 5, @inventory.elves.count
+        
+    assert_equal 5, inventory.elves.count
+    
+    elf = inventory.elves.first
+    
+    assert_includes elf.calories_carried, "1000"
+    assert_includes elf.calories_carried, "2000"
+    assert_includes elf.calories_carried, "3000"
   end
 end
