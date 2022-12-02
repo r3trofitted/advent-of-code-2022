@@ -1,15 +1,16 @@
 require_relative "round"
+require_relative "pick"
 
 class Strategy
   attr_reader :rounds
   
   ENCRYPTION_MAP = {
-    "A" => Round::ROCK,
-    "B" => Round::PAPER,
-    "C" => Round::SCISSORS,
-    "X" => Round::ROCK,
-    "Y" => Round::PAPER,
-    "Z" => Round::SCISSORS
+    "A" => Pick::ROCK,
+    "B" => Pick::PAPER,
+    "C" => Pick::SCISSORS,
+    "X" => Pick::ROCK,
+    "Y" => Pick::PAPER,
+    "Z" => Pick::SCISSORS
   }
   
   def self.from_data(data)
