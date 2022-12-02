@@ -5,24 +5,24 @@ class Pick
   
   OPTIONS = %i[rock paper scissors]
   
-  attr_reader :sign
+  protected attr_reader :value
   
-  def initialize(sign)
-    raise ArgumentError unless OPTIONS.include? sign
+  def initialize(value)
+    raise ArgumentError unless OPTIONS.include? value
     
-    @sign = sign
+    @value = value
   end
   
   def <=>(other)
-    return 0 if other.sign == self.sign
+    return 0 if other.value == self.value
     
-    case sign
+    case value
     when :rock
-      other.sign == :paper ? -1 : 1
+      other.value == :paper ? -1 : 1
     when :paper
-      other.sign == :scissors ? -1 : 1
+      other.value == :scissors ? -1 : 1
     when :scissors
-      other.sign == :rock ? -1 : 1
+      other.value == :rock ? -1 : 1
     end
   end
   
