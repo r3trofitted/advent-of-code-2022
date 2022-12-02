@@ -18,14 +18,11 @@ class Strategy
     opponent_pick = PICKS_ENCRYPTION_MAP.fetch(encrypted_pick)
     expected_pick = EXPECTATIONS_ENCRYPTION_MAP.fetch(encrypted_result)
     
-    [opponent_pick, opponent_pick.public_send(expected_pick)]
+    Round.new opponent_pick: opponent_pick, player_pick: opponent_pick.public_send(expected_pick)
   end
   
   def initialize(*rounds_strategies)
-    @rounds = rounds_strategies.map do |rs|
-      opponent, player = Strategy.parse_round_strategy(rs)
-      Round.new opponent_pick: opponent, player_pick: player
-    end
+    @rounds = rounds_strategies.map { |rs| Strategy.parse_round_strategy(rs) }
   end
   
   def final_score
