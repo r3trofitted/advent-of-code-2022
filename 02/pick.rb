@@ -20,46 +20,55 @@ class Pick
   end
   
   def <=>(other)
-    return 0 if other.value == self.value
-    
-    case value
-    when :rock
-      other.value == :paper ? -1 : 1
-    when :paper
-      other.value == :scissors ? -1 : 1
-    when :scissors
-      other.value == :rock ? -1 : 1
+    case other.value
+    when weaker_pick_value then 1
+    when stronger_pick_value then -1
+    else 0
     end
   end
   
   def weaker_pick
-    case value
-    when :rock     then Pick.new(:scissors)
-    when :paper    then Pick.new(:rock)
-    when :scissors then Pick.new(:paper)
-    end
+    Pick.new(weaker_pick_value)
   end
   
   def stronger_pick
+    Pick.new(stronger_pick_value)
+  end
+  
+  private \
+  def weaker_pick_value
     case value
-    when :rock     then Pick.new(:paper)
-    when :paper    then Pick.new(:scissors)
-    when :scissors then Pick.new(:rock)
+    when :rock     then :scissors
+    when :paper    then :rock
+    when :scissors then :paper
+    end
+  end
+  
+  private \
+  def stronger_pick_value
+    case value
+    when :rock     then :paper
+    when :paper    then :scissors
+    when :scissors then :rock
     end
   end
   
   def same_pick
-    self
+    Pick.new(value)
   end
   
   module Emojis
-    @🪨 = Pick.new(:rock)
-    @🧻 = Pick.new(:paper)
-    @✂️ = Pick.new(:scissors)
-    
     refine Kernel do
-      %w(🪨 🧻 ✂️).each do |p|
-        define_method(p) { Emojis.instance_variable_get(:"@#{p}") }
+      def 🪨
+        Pick.new(:rock)
+      end
+      
+      def 🧻
+        Pick.new(:paper)
+      end
+      
+      def ✂️
+        Pick.new(:scissors)
       end
     end
   end
