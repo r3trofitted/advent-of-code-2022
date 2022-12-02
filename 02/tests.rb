@@ -50,8 +50,8 @@ end
 require_relative "pick"
 class PickTest < Minitest::Test
   def test_comparison
-    assert Pick.new(Pick::ROCK) > Pick.new(Pick::SCISSORS)
-    assert Pick.new(Pick::PAPER) > Pick.new(Pick::ROCK)
-    assert Pick.new(Pick::SCISSORS) > Pick.new(Pick::PAPER)
+    assert Pick.new(:rock) > Pick.new(:scissors)
+    assert Pick.new(:paper) > Pick.new(:rock)
+    assert Pick.new(:scissors) > Pick.new(:paper)
   end
 end

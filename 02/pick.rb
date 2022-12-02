@@ -3,11 +3,7 @@ require "forwardable"
 class Pick
   include Comparable
   
-  OPTIONS = [
-    ROCK     = :rock,
-    PAPER    = :paper,
-    SCISSORS = :scissors
-  ]
+  OPTIONS = %i[rock paper scissors]
   
   attr_reader :sign
   
@@ -21,21 +17,21 @@ class Pick
     return 0 if other.sign == self.sign
     
     case sign
-    when ROCK
-      other.sign == PAPER ? -1 : 1
-    when PAPER
-      other.sign == SCISSORS ? -1 : 1
-    when SCISSORS
-      other.sign == ROCK ? -1 : 1
+    when :rock
+      other.sign == :paper ? -1 : 1
+    when :paper
+      other.sign == :scissors ? -1 : 1
+    when :scissors
+      other.sign == :rock ? -1 : 1
     end
   end
   
   module Signs
     extend Forwardable
     
-    @🪨 = Pick.new(Pick::ROCK)
-    @🧻 = Pick.new(Pick::PAPER)
-    @✂️ = Pick.new(Pick::SCISSORS)
+    @🪨 = Pick.new(:rock)
+    @🧻 = Pick.new(:paper)
+    @✂️ = Pick.new(:scissors)
     
     class << self
       attr_reader :🪨, :🧻, :✂️
