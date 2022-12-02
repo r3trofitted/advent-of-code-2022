@@ -1,9 +1,8 @@
 require_relative "round"
 require_relative "pick"
+using Pick::Emojis
 
 class Strategy
-  extend Pick::Signs
-  
   attr_reader :rounds
   
   ENCRYPTION_MAP = {

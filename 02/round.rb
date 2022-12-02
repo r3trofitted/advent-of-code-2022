@@ -1,8 +1,7 @@
 require_relative "pick"
+using Pick::Emojis
 
 class Round
-  extend Pick::Signs
-  
   PICKS_SCORES = { 🪨 => 1, 🧻 => 2, ✂️ => 3 }
   
   attr_reader :opponent_pick, :player_pick

@@ -1,9 +1,11 @@
 require "minitest/autorun"
 
 require_relative "strategy"
+require_relative "pick"
+
+using Pick::Emojis
+
 class StrategyTest < Minitest::Test
-  include Pick::Signs
-  
   def setup
     @data = <<~TXT
       A Y
@@ -29,8 +31,6 @@ end
 
 require_relative "round"
 class RoundTest < Minitest::Test
-  include Pick::Signs
-  
   def test_score_when_winning
     round = Round.new opponent_pick: 🪨, player_pick: 🧻
     assert_equal 8, round.score
@@ -47,7 +47,6 @@ class RoundTest < Minitest::Test
   end
 end
 
-require_relative "pick"
 class PickTest < Minitest::Test
   def test_comparison
     assert Pick.new(:rock) > Pick.new(:scissors)

@@ -1,5 +1,3 @@
-require "forwardable"
-
 class Pick
   include Comparable
   
@@ -26,17 +24,15 @@ class Pick
     end
   end
   
-  module Signs
-    extend Forwardable
-    
+  module Emojis
     @🪨 = Pick.new(:rock)
     @🧻 = Pick.new(:paper)
     @✂️ = Pick.new(:scissors)
     
-    class << self
-      attr_reader :🪨, :🧻, :✂️
+    refine Kernel do
+      %w(🪨 🧻 ✂️).each do |p|
+        define_method(p) { Emojis.instance_variable_get(:"@#{p}") }
+      end
     end
-    
-    def_delegators "Pick::Signs", :🪨, :🧻, :✂️
   end
 end
