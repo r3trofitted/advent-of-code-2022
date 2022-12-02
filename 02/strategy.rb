@@ -5,18 +5,20 @@ using Pick::Emojis
 class Strategy
   attr_reader :rounds
   
-  ENCRYPTION_MAP = {
-    "A" => 🪨, "B" => 🧻, "C" => ✂️,
-    "X" => 🪨, "Y" => 🧻, "Z" => ✂️
-  }
+  PICKS_ENCRYPTION_MAP        = { "A" => 🪨, "B" => 🧻, "C" => ✂️ }
+  EXPECTATIONS_ENCRYPTION_MAP = { "X" => :weaker_pick, "Y" => :same_pick, "Z" => :stronger_pick }
   
   def self.from_data(data)
     new *data.split(/\n/)
   end
   
   def self.parse_round_strategy(round_strategy)
-    picks = round_strategy.split
-    ENCRYPTION_MAP.values_at(*picks)
+    encrypted_pick, encrypted_result = round_strategy.split
+    
+    opponent_pick = PICKS_ENCRYPTION_MAP.fetch(encrypted_pick)
+    expected_pick = EXPECTATIONS_ENCRYPTION_MAP.fetch(encrypted_result)
+    
+    [opponent_pick, opponent_pick.public_send(expected_pick)]
   end
   
   def initialize(*rounds_strategies)

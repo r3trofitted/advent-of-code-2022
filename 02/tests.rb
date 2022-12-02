@@ -47,7 +47,7 @@ class StrategyTest < Minitest::Test
   def test_final_score
     strategy = Strategy.from_data(@data)
     
-    assert_equal 15, strategy.final_score
+    assert_equal 12, strategy.final_score
   end
 end
 
@@ -74,5 +74,17 @@ class PickTest < Minitest::Test
     assert Pick.new(:rock) > Pick.new(:scissors)
     assert Pick.new(:paper) > Pick.new(:rock)
     assert Pick.new(:scissors) > Pick.new(:paper)
+  end
+  
+  def test_stronger_pick
+    assert_equal Pick.new(:scissors), Pick.new(:paper).stronger_pick
+    assert_equal Pick.new(:rock), Pick.new(:scissors).stronger_pick
+    assert_equal Pick.new(:paper), Pick.new(:rock).stronger_pick
+  end
+  
+  def test_weaker_pick
+    assert_equal Pick.new(:rock), Pick.new(:paper).weaker_pick
+    assert_equal Pick.new(:paper), Pick.new(:scissors).weaker_pick
+    assert_equal Pick.new(:scissors), Pick.new(:rock).weaker_pick
   end
 end

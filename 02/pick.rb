@@ -11,6 +11,14 @@ class Pick
     @value = value
   end
   
+  def hash
+    @value.hash
+  end
+  
+  def eql?(other)
+    @value.eql? other.value
+  end
+  
   def <=>(other)
     return 0 if other.value == self.value
     
@@ -22,6 +30,26 @@ class Pick
     when :scissors
       other.value == :rock ? -1 : 1
     end
+  end
+  
+  def weaker_pick
+    case value
+    when :rock     then Pick.new(:scissors)
+    when :paper    then Pick.new(:rock)
+    when :scissors then Pick.new(:paper)
+    end
+  end
+  
+  def stronger_pick
+    case value
+    when :rock     then Pick.new(:paper)
+    when :paper    then Pick.new(:scissors)
+    when :scissors then Pick.new(:rock)
+    end
+  end
+  
+  def same_pick
+    self
   end
   
   module Emojis
