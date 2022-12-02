@@ -20,12 +20,28 @@ class StrategyTest < Minitest::Test
     assert_equal 3, strategy.rounds.count
   end
   
-  def test_parsing_rounds_data
+  def test_parsing_rounds_data_when_aiming_for_a_draw
     strategy = Strategy.new("A Y")
     round    = strategy.rounds.first
     
     assert_equal 🪨, round.opponent_pick
-    assert_equal 🧻, round.player_pick
+    assert_equal 🪨, round.player_pick
+  end
+  
+  def test_parsing_rounds_data_when_aiming_for_a_loss
+    strategy = Strategy.new("B X")
+    round    = strategy.rounds.first
+    
+    assert_equal 🧻, round.opponent_pick
+    assert_equal 🪨, round.player_pick
+  end
+  
+  def test_parsing_rounds_data_when_aiming_for_a_win
+    strategy = Strategy.new("C Z")
+    round    = strategy.rounds.first
+    
+    assert_equal ✂️, round.opponent_pick
+    assert_equal 🪨, round.player_pick
   end
   
   def test_final_score
