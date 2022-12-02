@@ -35,26 +35,22 @@ class Pick
     Pick.new(stronger_pick_value)
   end
   
-  private \
-  def weaker_pick_value
-    case value
-    when :rock     then :scissors
-    when :paper    then :rock
-    when :scissors then :paper
-    end
-  end
-  
-  private \
-  def stronger_pick_value
-    case value
-    when :rock     then :paper
-    when :paper    then :scissors
-    when :scissors then :rock
-    end
-  end
-  
   def same_pick
     Pick.new(value)
+  end
+  
+  private
+  
+  def weaker_pick_value
+    sorted_options.first
+  end
+  
+  def stronger_pick_value
+    sorted_options.last
+  end
+  
+  def sorted_options
+    OPTIONS.rotate(OPTIONS.index(value) - 1) # places the current value in the middle of the options list
   end
   
   module Emojis
