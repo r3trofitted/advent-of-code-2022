@@ -11,27 +11,60 @@ class Pick
     @value = value
   end
   
+  def hash
+    @value.hash
+  end
+  
+  def eql?(other)
+    @value.eql? other.value
+  end
+  
   def <=>(other)
-    return 0 if other.value == self.value
-    
-    case value
-    when :rock
-      other.value == :paper ? -1 : 1
-    when :paper
-      other.value == :scissors ? -1 : 1
-    when :scissors
-      other.value == :rock ? -1 : 1
+    case other.value
+    when weaker_pick_value then 1
+    when stronger_pick_value then -1
+    else 0
     end
   end
   
+  def weaker_pick
+    Pick.new(weaker_pick_value)
+  end
+  
+  def stronger_pick
+    Pick.new(stronger_pick_value)
+  end
+  
+  def same_pick
+    Pick.new(value)
+  end
+  
+  private
+  
+  def weaker_pick_value
+    sorted_options.first
+  end
+  
+  def stronger_pick_value
+    sorted_options.last
+  end
+  
+  def sorted_options
+    OPTIONS.rotate(OPTIONS.index(value) - 1) # places the current value in the middle of the options list
+  end
+  
   module Emojis
-    @🪨 = Pick.new(:rock)
-    @🧻 = Pick.new(:paper)
-    @✂️ = Pick.new(:scissors)
-    
     refine Kernel do
-      %w(🪨 🧻 ✂️).each do |p|
-        define_method(p) { Emojis.instance_variable_get(:"@#{p}") }
+      def 🪨
+        Pick.new(:rock)
+      end
+      
+      def 🧻
+        Pick.new(:paper)
+      end
+      
+      def ✂️
+        Pick.new(:scissors)
       end
     end
   end
