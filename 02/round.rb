@@ -1,8 +1,8 @@
 class Round
-  PICKS = [
-    ROCK     = :🪨,
-    PAPER    = :🧻,
-    SCISSORS = :✂️
+  PICKS_SCORES = [
+    ROCK     = 1,
+    PAPER    = 2,
+    SCISSORS = 3
   ]
   
   attr_reader :opponent_pick, :player_pick
@@ -12,5 +12,6 @@ class Round
   end
   
   def score
+    player_pick + 6
   end
 end
