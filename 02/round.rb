@@ -10,4 +10,7 @@ class Round
   def initialize(opponent_pick:, player_pick:)
     @opponent_pick, @player_pick = opponent_pick, player_pick
   end
+  
+  def score
+  end
 end

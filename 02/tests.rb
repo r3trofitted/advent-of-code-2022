@@ -26,3 +26,10 @@ class StrategyTest < Minitest::Test
     assert_equal Round::PAPER, round.player_pick
   end
 end
+
+class RoundTest < Minitest::Test
+  def test_score_when_winning
+    round = Round.new(opponent_pick: Round::ROCK, player_pick: Round::PAPER)
+    assert_equal 8, round.score
+  end
+end
