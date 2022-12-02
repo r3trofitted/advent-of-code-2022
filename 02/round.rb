@@ -1,11 +1,9 @@
 require_relative "pick"
 
 class Round
-  PICKS_SCORES = {
-    Pick::ROCK     => 1,
-    Pick::PAPER    => 2,
-    Pick::SCISSORS => 3
-  }
+  extend Pick::Signs
+  
+  PICKS_SCORES = { 🪨 => 1, 🧻 => 2, ✂️ => 3 }
   
   attr_reader :opponent_pick, :player_pick
   
@@ -14,7 +12,7 @@ class Round
   end
   
   def score
-    PICKS_SCORES.fetch(@player_pick.sign) + outcome_score
+    PICKS_SCORES.fetch(@player_pick) + outcome_score
   end
   
   def outcome_score

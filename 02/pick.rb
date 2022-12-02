@@ -1,14 +1,18 @@
+require "forwardable"
+
 class Pick
   include Comparable
   
-  ROCK     = :🪨
-  PAPER    = :🧻
-  SCISSORS = :✂️
+  OPTIONS = [
+    ROCK     = :rock,
+    PAPER    = :paper,
+    SCISSORS = :scissors
+  ]
   
   attr_reader :sign
   
   def initialize(sign)
-    raise ArgumentError unless [ROCK, PAPER, SCISSORS].include? sign
+    raise ArgumentError unless OPTIONS.include? sign
     
     @sign = sign
   end
@@ -24,5 +28,19 @@ class Pick
     when SCISSORS
       other.sign == ROCK ? -1 : 1
     end
+  end
+  
+  module Signs
+    extend Forwardable
+    
+    @🪨 = Pick.new(Pick::ROCK)
+    @🧻 = Pick.new(Pick::PAPER)
+    @✂️ = Pick.new(Pick::SCISSORS)
+    
+    class << self
+      attr_reader :🪨, :🧻, :✂️
+    end
+    
+    def_delegators "Pick::Signs", :🪨, :🧻, :✂️
   end
 end

@@ -2,6 +2,8 @@ require "minitest/autorun"
 
 require_relative "strategy"
 class StrategyTest < Minitest::Test
+  include Pick::Signs
+  
   def setup
     @data = <<~TXT
       A Y
@@ -20,25 +22,27 @@ class StrategyTest < Minitest::Test
     strategy = Strategy.new("A Y")
     round    = strategy.rounds.first
     
-    assert_equal Pick::ROCK, round.opponent_pick
-    assert_equal Pick::PAPER, round.player_pick
+    assert_equal 🪨, round.opponent_pick
+    assert_equal 🧻, round.player_pick
   end
 end
 
 require_relative "round"
 class RoundTest < Minitest::Test
+  include Pick::Signs
+  
   def test_score_when_winning
-    round = Round.new opponent_pick: Pick.new(Pick::ROCK), player_pick: Pick.new(Pick::PAPER)
+    round = Round.new opponent_pick: 🪨, player_pick: 🧻
     assert_equal 8, round.score
   end
   
   def test_score_when_losing
-    round = Round.new opponent_pick: Pick.new(Pick::PAPER), player_pick: Pick.new(Pick::ROCK)
+    round = Round.new opponent_pick: 🧻, player_pick: 🪨
     assert_equal 1, round.score
   end
   
   def test_score_when_draw
-    round = Round.new opponent_pick: Pick.new(Pick::SCISSORS), player_pick: Pick.new(Pick::SCISSORS)
+    round = Round.new opponent_pick: ✂️, player_pick: ✂️
     assert_equal 6, round.score
   end
 end
