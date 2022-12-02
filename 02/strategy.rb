@@ -25,4 +25,8 @@ class Strategy
       Round.new opponent_pick: opponent, player_pick: player
     end
   end
+  
+  def final_score
+    @rounds.sum(&:score)
+  end
 end

@@ -27,6 +27,12 @@ class StrategyTest < Minitest::Test
     assert_equal 🪨, round.opponent_pick
     assert_equal 🧻, round.player_pick
   end
+  
+  def test_final_score
+    strategy = Strategy.from_data(@data)
+    
+    assert_equal 15, strategy.final_score
+  end
 end
 
 require_relative "round"
