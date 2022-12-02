@@ -2,7 +2,7 @@
 require_relative "strategy"
 
 strategy = Strategy.from_data(DATA.read)
-puts "If everything goes exactly as the strategy plans, your final score will be: #{stategy.final_score}"
+puts "If everything goes exactly as the strategy plans, your final score will be: #{strategy.final_score}"
 
 __END__
 C Y
