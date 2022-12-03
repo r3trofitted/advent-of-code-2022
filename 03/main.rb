@@ -4,6 +4,7 @@ require_relative "rucksacks_sorter"
 sorter = RucksacksSorter.from_data(DATA.read)
 
 puts "The sum of the priorities of the misplaced items is #{sorter.misplaced_items_priorities_sum}"
+puts "The sum of the priorities of the badges is #{sorter.badges_priorities_sum}"
 
 __END__
 lflZfgnSnlmmlgGfjGthQPtLNsQhvbHLLpSS
