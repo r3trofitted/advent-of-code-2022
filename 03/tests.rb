@@ -40,4 +40,11 @@ class RucksacksSorterTest < Minitest::Test
     assert_includes sorter.misplaced_items, "t"
     assert_includes sorter.misplaced_items, "s"
   end
+  
+  def test_badges
+    sorter = RucksacksSorter.from_data(@data)
+    
+    assert_includes sorter.badges, "r"
+    assert_includes sorter.badges, "Z"
+  end
 end
