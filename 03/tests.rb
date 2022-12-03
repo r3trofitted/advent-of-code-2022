@@ -29,4 +29,15 @@ class RucksacksSorterTest < Minitest::Test
     assert_includes sorter.misplaced_items_priorities, 20 # t
     assert_includes sorter.misplaced_items_priorities, 19 # s
   end
+  
+  def test_misplaced_items
+    sorter = RucksacksSorter.from_data(@data)
+    
+    assert_includes sorter.misplaced_items, "p"
+    assert_includes sorter.misplaced_items, "L"
+    assert_includes sorter.misplaced_items, "P"
+    assert_includes sorter.misplaced_items, "v"
+    assert_includes sorter.misplaced_items, "t"
+    assert_includes sorter.misplaced_items, "s"
+  end
 end
