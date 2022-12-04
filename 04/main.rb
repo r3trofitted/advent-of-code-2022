@@ -1,12 +1,6 @@
 #!/usr/bin/env ruby
-
-# part 1
-# z=->a,b{(a..b).to_a.zip([]).to_h}
-# p (DATA.sum{_1.split(/\D/).map(&:to_i).then{|a,b,c,d|x=z.(a,b);y=z.(c,d);(x>=y||y>=x)?1:0}})
-
-# part 2
-p (DATA.sum{_1.split(/\D/).map(&:to_i).then {|a,b,c,d|(a==c||(a..b)===c||(c..d)===a)?1:0}})
-
+z=->a,b{[*a..b].zip([]).to_h}
+p (DATA.each.inject([0,0]){|(i,j),l|l.split(/\D/).map(&:to_i).tap{|a,b,c,d|x=z.(a,b);y=z.(c,d);i+=1 if(x>=y||y>=x);j+=1 if(a==c||(a..b)===c||(c..d)===a)};[i,j]})
 __END__
 51-88,52-87
 41-55,22-56
