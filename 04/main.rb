@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
-ƛ=->a,b{(a..b).to_a.zip([]).to_h}
-p (DATA.sum{|l|l.split(/\D/).map(&:to_i).then{|a,b,c,d|x=ƛ.(a,b);y=ƛ.(c,d);(x>=y||y>=x)?1:0}})
+# ƛ=->a,b{(a..b).to_a.zip([]).to_h}
+# p (DATA.sum{|l|l.split(/\D/).map(&:to_i).then{|a,b,c,d|x=ƛ.(a,b);y=ƛ.(c,d);(x>=y||y>=x)?1:0}})
+
+p (DATA.sum{|l|l.split(/\D/).map(&:to_i).then {|a,b,c,d|(a==c||(a..b)===c||(c..d)===a)?1:0}})
 __END__
 51-88,52-87
 41-55,22-56
