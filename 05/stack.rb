@@ -8,6 +8,10 @@ class Stack
     @crates = crates.compact
   end
   
+  def clone
+    Stack.new(@crates.dup)
+  end
+  
   def to_s
     @crates.join
   end
