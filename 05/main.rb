@@ -4,13 +4,13 @@ require_relative "cranes"
 
 stacks, commands = Drawing.parse(DATA.read)
 
-crate_move_9000 = Cranes::CrateMover9000.new(stacks)
-crate_move_9000.operate! commands
-puts "With the CrateMover 9000, after the rearrangement procedure completes, the following crates are on top of the stacks: #{crate_move_9000.stacks.map(&:top).join}"
+crate_mover_9000 = Cranes::CrateMover9000.new(stacks)
+crate_mover_9000.operate! commands
+puts "With the CrateMover 9000, after the rearrangement procedure completes, the following crates are on top of the stacks: #{crate_mover_9000.stacks.map(&:top).join}"
 
-crate_move_9001 = Cranes::CrateMover9000.new(stacks)
-crate_move_9001.operate! commands
-puts "With the CrateMover 9001, after the rearrangement procedure completes, the following crates are on top of the stacks: #{crate_move_9001.stacks.map(&:top).join}"
+crate_mover_9001 = Cranes::CrateMover9001.new(stacks)
+crate_mover_9001.operate! commands
+puts "With the CrateMover 9001, after the rearrangement procedure completes, the following crates are on top of the stacks: #{crate_mover_9001.stacks.map(&:top).join}"
 
 __END__
 [P]     [C]         [M]            
