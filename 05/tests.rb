@@ -14,9 +14,9 @@ class DrawingTest < Minitest::Test
     
     stacks = drawing.stacks
     
-    assert_equal %w(N Z), stacks[1]
-    assert_equal %w(D C M), stacks[2]
-    assert_equal %w(P), stacks[3]
+    assert_equal "NZ", stacks[1].to_s
+    assert_equal "DCM", stacks[2].to_s
+    assert_equal "P", stacks[3].to_s
   end
   
   def test_parse_commands

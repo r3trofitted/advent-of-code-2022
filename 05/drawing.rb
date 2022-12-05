@@ -1,3 +1,4 @@
+require_relative "stack"
 require_relative "command"
 
 class Drawing
@@ -24,7 +25,7 @@ class Drawing
       .map { |l| l.scan(STACKS_PARSER).flatten } # extracting the crates (or their absence)
       .reject { |c| c.all?(&:nil?) }             # ignoring lines with no crates at all (captions, commands, etc.)
       .transpose                                 # converting the parsed data into arrays of crates (in vertical stacks)
-      .map(&:compact)                            # removing the non-existant crates from the top of the stacks
+      .map { |crates| Stack.new crates }         # converting to stacks
       .unshift([])                               # adding a blank stack so that we can the stacks index starts at 1
   end
   
