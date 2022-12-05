@@ -1,4 +1,12 @@
 #!/usr/bin/env ruby
+require_relative "drawing"
+require_relative "crane"
+
+stacks, commands = Drawing.parse(DATA.read)
+crane = Crate.new(stacks)
+crane.operate! commands
+
+puts "After the rearrangement procedure completes, the following crates are on top of the stacks: #{crane.stacks_tops}"
 
 __END__
 [P]     [C]         [M]            
