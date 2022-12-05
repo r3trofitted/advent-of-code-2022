@@ -2,7 +2,7 @@ require_relative "stack"
 require_relative "command"
 
 class Drawing
-  STACKS_PARSER = /(?:\[([A-Z])\])|\s{3}/
+  STACKS_PARSER = /(?:\[([A-Z])\])|\s{3}\s?/
   COMMANDS_PARSER = /move (?<move>\d+) from (?<from>\d+) to (?<to>\d+)/
   
   def self.parse(input)

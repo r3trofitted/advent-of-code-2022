@@ -6,10 +6,10 @@ require_relative "command"
 class DrawingTest < Minitest::Test
   def test_parse_stacks
     drawing = Drawing.new <<~TXT
-          [D]    
-      [N] [C]    
-      [Z] [M] [P]
-       1   2   3 
+          [D]        
+      [N] [C]     [Q]
+      [Z] [M] [P] [R]
+       1   2   3   4 
     TXT
     
     stacks = drawing.stacks
@@ -17,6 +17,7 @@ class DrawingTest < Minitest::Test
     assert_equal "NZ", stacks[0].to_s
     assert_equal "DCM", stacks[1].to_s
     assert_equal "P", stacks[2].to_s
+    assert_equal "QR", stacks[3].to_s
   end
   
   def test_parse_commands
