@@ -18,7 +18,6 @@ module Cranes
   end
 
   class CrateMover9001 < CrateMover9000
-    
     private
   
     def operate_command(command)
@@ -28,7 +27,7 @@ module Cranes
 
   class StacksList
     def initialize(stacks)
-      @_stacks = stacks
+      @_stacks = stacks.map(&:clone)
     end
   
     def [](n)

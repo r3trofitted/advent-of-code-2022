@@ -40,6 +40,14 @@ end
 require_relative "cranes"
 module Cranes
   class CrateMover9000Test < Minitest::Test
+    def test_stacks_are_copies_of_the_originals
+      stack = Stack.new(["N", "Z"])
+      
+      crane = CrateMover9000.new([stack])
+      
+      refute_same stack, crane.stacks.first
+    end
+    
     def test_operate
       stacks = [
         Stack.new(["N", "Z"]),
