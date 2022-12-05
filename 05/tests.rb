@@ -14,9 +14,9 @@ class DrawingTest < Minitest::Test
     
     stacks = drawing.stacks
     
-    assert_equal "NZ", stacks[1].to_s
-    assert_equal "DCM", stacks[2].to_s
-    assert_equal "P", stacks[3].to_s
+    assert_equal "NZ", stacks[0].to_s
+    assert_equal "DCM", stacks[1].to_s
+    assert_equal "P", stacks[2].to_s
   end
   
   def test_parse_commands
@@ -33,5 +33,23 @@ class DrawingTest < Minitest::Test
     assert_equal Command.new(move: 3, from: 1, to: 3), commands[1]
     assert_equal Command.new(move: 2, from: 2, to: 1), commands[2]
     assert_equal Command.new(move: 1, from: 1, to: 2), commands[3]
+  end
+end
+
+require_relative "crane"
+class CraneTest < Minitest::Test
+  def test_operate
+    stacks = [
+      Stack.new(["N", "Z"]),
+      Stack.new(["D", "C", "M"]),
+      Stack.new(["P"]),
+    ]
+    crane = Crane.new(stacks)
+    
+    crane.operate! Command.new(move: 2, from: 2, to: 1)
+    
+    assert_equal "CDNZ", crane.stacks[1].to_s
+    assert_equal "M", crane.stacks[2].to_s
+    assert_equal "P", crane.stacks[3].to_s
   end
 end
