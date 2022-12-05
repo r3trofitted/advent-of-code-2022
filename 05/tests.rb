@@ -37,15 +37,15 @@ class DrawingTest < Minitest::Test
   end
 end
 
-require_relative "crane"
-class CraneTest < Minitest::Test
+require_relative "cranes"
+class CrateMover9000Test < Minitest::Test
   def test_operate
     stacks = [
       Stack.new(["N", "Z"]),
       Stack.new(["D", "C", "M"]),
       Stack.new(["P"]),
     ]
-    crane = Crane.new(stacks)
+    crane = CrateMover9000.new(stacks)
     
     crane.operate! Command.new(move: 2, from: 2, to: 1)
     
@@ -60,7 +60,7 @@ class CraneTest < Minitest::Test
       Stack.new(["D", "C", "M"]),
       Stack.new(["P"]),
     ]
-    crane = Crane.new(stacks)
+    crane = CrateMover9000.new(stacks)
     
     crane.operate! [Command.new(move: 2, from: 2, to: 1), Command.new(move: 1, from: 3, to: 2)]
     

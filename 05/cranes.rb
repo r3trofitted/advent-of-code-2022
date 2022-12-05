@@ -1,4 +1,4 @@
-class Crane
+class CrateMover9000
   attr_reader :stacks
   
   def initialize(stacks)
