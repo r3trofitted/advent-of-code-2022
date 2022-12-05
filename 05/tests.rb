@@ -52,4 +52,19 @@ class CraneTest < Minitest::Test
     assert_equal "M", crane.stacks[2].to_s
     assert_equal "P", crane.stacks[3].to_s
   end
+  
+  def test_operate_multiple_commands
+    stacks = [
+      Stack.new(["N", "Z"]),
+      Stack.new(["D", "C", "M"]),
+      Stack.new(["P"]),
+    ]
+    crane = Crane.new(stacks)
+    
+    crane.operate! [Command.new(move: 2, from: 2, to: 1), Command.new(move: 1, from: 3, to: 2)]
+    
+    assert_equal "CDNZ", crane.stacks[1].to_s
+    assert_equal "PM", crane.stacks[2].to_s
+    assert_equal "", crane.stacks[3].to_s
+  end
 end

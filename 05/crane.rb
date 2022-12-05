@@ -6,7 +6,13 @@ class Crane
 
   end
   
-  def operate!(command)
+  def operate!(command_or_commands)
+    Array(command_or_commands).each { |c| operate_command c }
+  end
+  
+  private
+  
+  def operate_command(command)
     @stacks[command.to].unshift(*@stacks[command.from].shift(command.move).reverse)
   end
 end
