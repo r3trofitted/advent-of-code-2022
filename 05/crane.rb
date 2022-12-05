@@ -2,8 +2,7 @@ class Crane
   attr_reader :stacks
   
   def initialize(stacks)
-    @stacks = stacks.unshift([]) # adding a blank stack so that we can the stacks index starts at 1
-
+    @stacks = StacksList.new(stacks)
   end
   
   def operate!(command_or_commands)
@@ -14,5 +13,23 @@ class Crane
   
   def operate_command(command)
     @stacks[command.to].unshift(*@stacks[command.from].shift(command.move).reverse)
+  end
+  
+  class StacksList
+    def initialize(stacks)
+      @_stacks = stacks
+    end
+    
+    def [](n)
+      @_stacks[n-1]
+    end
+    
+    def method_missing(name, *args, &b)
+      @_stacks.send name, *args, &b
+    end
+    
+    def respond_to_missing? name
+      @_stacks.respond_to_missing?(name)
+    end
   end
 end
