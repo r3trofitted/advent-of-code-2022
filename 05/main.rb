@@ -3,10 +3,10 @@ require_relative "drawing"
 require_relative "crane"
 
 stacks, commands = Drawing.parse(DATA.read)
-crane = Crate.new(stacks)
+crane = Crane.new(stacks)
 crane.operate! commands
 
-puts "After the rearrangement procedure completes, the following crates are on top of the stacks: #{crane.stacks_tops}"
+puts "After the rearrangement procedure completes, the following crates are on top of the stacks: #{crane.stacks.map(&:top).join}"
 
 __END__
 [P]     [C]         [M]            

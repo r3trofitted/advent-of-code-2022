@@ -11,4 +11,8 @@ class Stack
   def to_s
     @crates.join
   end
+  
+  def top
+    @crates.first
+  end
 end
