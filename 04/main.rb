@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 z=->a,b{[*a..b].zip([]).to_h}
-p (DATA.each.inject([0,0]){|(i,j),l|l.split(/\D/).map(&:to_i).tap{|a,b,c,d|x=z.(a,b);y=z.(c,d);i+=1 if(x>=y||y>=x);j+=1 if(a==c||(a..b)===c||(c..d)===a)};[i,j]})
+p(DATA.each.inject([0,0]){|(i,j),l|l.split(/\D/).map(&:to_i).tap{|a,b,c,d|x=z.(a,b);y=z.(c,d);i+=1 if(x>=y||y>=x);j+=1 if(a==c||(a..b)===c||(c..d)===a)};[i,j]})
 __END__
 51-88,52-87
 41-55,22-56
